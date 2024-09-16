@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Time Hourglass</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e8f5e9;
+        }
+        .hourglass-widget {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .hourglass {
+            width: 100px;
+            height: 160px;
+            background-color: #1b5e20;
+            margin: 20px auto;
+            position: relative;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        .top, .bottom {
+            width: 100%;
+            height: 50%;
+            position: absolute;
+            overflow: hidden;
+        }
+        .top { top: 0; }
+        .bottom { bottom: 0; }
+        .sand {
+            width: 100%;
+            height: 100%;
+            background-color: #4caf50;
+            position: absolute;
+            transition: height 1s linear;
+        }
+        .top .sand { bottom: 0; }
+        .bottom .sand { top: 0; height: 0; }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #1b5e20;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <div class="hourglass-widget">
+        <h2>Time To Read</h2>
+        <input type="number" id="readingTime" min="5" max="120" value="30">
+        <button onclick="startTimer()">Start</button>
+        <div class="hourglass">
+            <div class="top"><div class="sand"></div></div>
+            <div class="bottom"><div class="sand"></div></div>
+        </div>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        let timer;
+        let totalTime;
+
+        function startTimer() {
+            clearTimeout(timer);
+            const readingTime = document.getElementById('readingTime').value;
+            totalTime = Math.max(5, Math.min(120, readingTime)) * 60; // Convert to seconds
+            const topSand = document.querySelector('.top .sand');
+            const bottomSand = document.querySelector('.bottom .sand');
+            
+            topSand.style.height = '100%';
+            bottomSand.style.height = '0%';
+            document.getElementById('message').textContent = '';
+
+            let elapsedTime = 0;
+            updateSand();
+
+            function updateSand() {
+                const progress = elapsedTime / totalTime;
+                topSand.style.height = `${100 - progress * 100}%`;
+                bottomSand.style.height = `${progress * 100}%`;
+
+                elapsedTime++;
+
+                if (elapsedTime <= totalTime) {
+                    timer = setTimeout(updateSand, 1000);
+                } else {
+                    document.getElementById('message').textContent = 'Time is up!';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
