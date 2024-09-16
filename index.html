@@ -20,10 +20,18 @@
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border: 2px solid #4caf50;
         }
         h2 {
             margin-top: 0;
-            color: #1b5e20;
+            color: #4caf50;
+            text-align: center;
+        }
+        .timer-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
         }
         .timer-bar {
             width: 100%;
@@ -36,39 +44,41 @@
         .timer-progress {
             width: 0;
             height: 100%;
-            background-color: #4caf50;
+            background-color: #81c784;
             transition: width 1s linear;
         }
         .controls {
             display: flex;
-            align-items: center;
+            justify-content: center;
             margin-top: 20px;
         }
         select {
             width: 60px;
             padding: 5px;
-            margin-right: 10px;
+            margin: 0 5px;
         }
         button {
             width: 30px;
             height: 30px;
             border: none;
-            background-color: #1b5e20;
+            background-color: #4caf50;
             color: white;
             border-radius: 50%;
             cursor: pointer;
             font-size: 16px;
-            margin-left: 10px;
+            margin: 0 5px;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 0;
         }
     </style>
 </head>
 <body>
     <div class="timer-widget">
         <h2>Reading Timer</h2>
-        <div>I want to read for 
+        <div class="timer-text">
+            I want to read for
             <select id="readingTime">
                 <option value="5">5</option>
                 <option value="10">10</option>
