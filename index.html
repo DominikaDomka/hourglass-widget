@@ -24,7 +24,7 @@
         }
         h2 {
             margin-top: 0;
-            color: #2e7d32;
+            color: black;
             text-align: center;
         }
         .timer-text {
@@ -32,7 +32,7 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 15px;
-            color: #2e7d32;
+            color: black;
         }
         .timer-bar {
             width: 100%;
@@ -57,7 +57,7 @@
             width: 60px;
             padding: 5px;
             margin: 0 5px;
-            color: #2e7d32;
+            color: black;
             border: 1px solid #4caf50;
             border-radius: 4px;
         }
@@ -76,6 +76,9 @@
             align-items: center;
             padding: 0;
             line-height: 1;
+        }
+        #startPauseBtn {
+            padding-top: 3px; /* Adjust this value to move the symbol down */
         }
     </style>
 </head>
@@ -128,6 +131,7 @@
                 totalTime = document.getElementById('readingTime').value * 60;
                 isRunning = true;
                 startPauseBtn.innerHTML = '⏸';
+                startPauseBtn.style.paddingTop = '0px';
                 timer = setInterval(updateTimer, 1000);
             }
         }
@@ -136,6 +140,7 @@
             clearInterval(timer);
             isRunning = false;
             startPauseBtn.innerHTML = '▶';
+            startPauseBtn.style.paddingTop = '3px';
         }
 
         function resetTimer() {
@@ -143,6 +148,7 @@
             isRunning = false;
             elapsedTime = 0;
             startPauseBtn.innerHTML = '▶';
+            startPauseBtn.style.paddingTop = '3px';
             timerProgress.style.width = '0%';
         }
 
